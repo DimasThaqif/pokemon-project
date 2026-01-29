@@ -29,7 +29,9 @@ class PokemonService
             );
 
             if ($response->failed()) {
-                throw new \Exception("Pokemon not found");
+                throw new \Symfony\Component\HttpKernel\Exception\NotFoundHttpException(
+                    'Pokemon tidak ditemukan'
+                );
             }
 
             return $response->json();
