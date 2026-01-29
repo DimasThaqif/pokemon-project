@@ -21,12 +21,11 @@ class PokemonService
         });
     }
 
-    public function getDetail(string $name)
+    public function getDetail(string $name): array
     {
         return Cache::remember("pokemon_detail_{$name}", 3600, function () use ($name) {
-            $response = Http::get(
-                "https://pokeapi.co/api/v2/pokemon/{$name}"
-            );
+
+            $response = Http::get("https://pokeapi.co/api/v2/pokemon/{$name}");
 
             if ($response->failed()) {
                 throw new \Symfony\Component\HttpKernel\Exception\NotFoundHttpException(
@@ -34,9 +33,11 @@ class PokemonService
                 );
             }
 
-            return $response->json();
+            return $response->json(); 
         });
     }
+
+
 
     public function getByType(string $type)
     {
