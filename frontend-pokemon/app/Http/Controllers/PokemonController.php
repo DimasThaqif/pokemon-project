@@ -8,20 +8,15 @@ class PokemonController extends Controller
 {
     public function index()
     {
-        // ambil data dari backend API
-        $response = Http::get('https://pokeapi.co/api/v2/pokemon?limit=20');
+        $response = Http::timeout(10)
+            ->get('http://127.0.0.1:8000/api/pokemon');
 
-        $pokemons = $response->json()['results'];
+        if ($response->failed()) {
+            abort(500, 'Gagal mengambil data Pokémon');
+        }
+
+        $pokemons = $response->json();
 
         return view('pokemon.index', compact('pokemons'));
-    }
-
-    public function show($name)
-    {
-        $response = Http::get("http://127.0.0.1:8000/api/pokemon/{$name}");
-
-        $pokemon = $response->json();
-
-        return view('pokemon.show', compact('pokemon'));
     }
 }
