@@ -12,41 +12,49 @@ class PokemonController extends Controller
         protected PokemonService $pokemonService
     ) {}
 
+
     public function index(Request $request)
     {
-        $limit = $request->get('limit', 20);
-        $page  = $request->get('page', 1);
+        $limit = (int) $request->get('limit', 20);
+        $page  = (int) $request->get('page', 1);
 
         $data = $this->pokemonService->getList($limit, $page);
 
-        return response()->json(
-            collect($data)->map(fn ($p) => [
+        return response()->json([
+            'page'  => $page,
+            'limit' => $limit,
+            'data'  => collect($data)->map(fn($p) => [
                 'name' => $p['name'],
-                'url'  => $p['url']
-            ])
-        );
+                'url'  => $p['url'],
+            ]),
+        ]);
     }
 
     public function show(string $name)
     {
-        $data = $this->pokemonService->getDetail($name);
+        $result = $this->pokemonService->getDetail($name);
 
         return response()->json([
-            'id'     => $data['id'],
-            'name'   => $data['name'],
-            'height' => $data['height'],
-            'weight' => $data['weight'],
-            'types'  => collect($data['types'])->map(
-                fn ($t) => $t['type']['name']
-            ),
-            'sprite' => $data['sprites']['front_default'],
+            'pokemon' => [
+                'id'     => $result['data']['id'],
+                'name'   => $result['data']['name'],
+                'height' => $result['data']['height'],
+                'weight' => $result['data']['weight'],
+                'types'  => collect($result['data']['types'])
+                    ->pluck('type.name'),
+                'sprite' => $result['data']['sprites']['front_default'],
+                'source' => $result['source'],
+            ]
         ]);
     }
 
+
+
     public function byType(string $type)
     {
-        return response()->json(
-            $this->pokemonService->getByType($type)
-        );
+        return response()->json([
+            'type' => $type,
+            'data' => $this->pokemonService->getByType($type),
+        ]);
     }
 }
