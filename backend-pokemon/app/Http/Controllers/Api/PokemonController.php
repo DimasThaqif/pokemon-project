@@ -14,21 +14,15 @@ class PokemonController extends Controller
 
 
     public function index(Request $request)
-    {
-        $limit = (int) $request->get('limit', 20);
-        $page  = (int) $request->get('page', 1);
+{
+    $limit = (int) $request->get('limit', 20);
+    $page  = (int) $request->get('page', 1);
 
-        $data = $this->pokemonService->getList($limit, $page);
+    $result = $this->pokemonService->getList($limit, $page);
 
-        return response()->json([
-            'page'  => $page,
-            'limit' => $limit,
-            'data'  => collect($data)->map(fn($p) => [
-                'name' => $p['name'],
-                'url'  => $p['url'],
-            ]),
-        ]);
-    }
+    return response()->json($result);
+}
+
 
     public function show(string $name)
     {
