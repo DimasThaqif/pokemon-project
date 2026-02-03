@@ -12,9 +12,7 @@ import HelloWorld from './components/HelloWorld.vue'
     </a>
   </div>
   <HelloWorld msg="Vite + Vue" /> -->
-   <div class="bg-red-500 text-white p-10 text-2xl">
-    Tailwind Works 🚀
-  </div>
+  <router-view />
 </template>
 
 <style scoped>
