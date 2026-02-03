@@ -7,5 +7,5 @@ use App\Http\Controllers\Api\PokemonController;
 // Route::get('/pokemon/{name}', [PokemonController::class, 'show']);
 
 Route::get('/', function (){
-    return 'web ok';
+    return 'backend ok';
 });
