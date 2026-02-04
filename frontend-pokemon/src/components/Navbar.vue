@@ -12,9 +12,10 @@ const menu = [
 </script>
 
 <template>
-  <nav class="sticky top-0 z-50 backdrop-blur bg-neutral-900/80 border-b border-neutral-700">
+  <nav
+    class="sticky top-0 z-50 bg-neutral-900/80 backdrop-blur border-b border-neutral-700"
+  >
     <div class="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
-
       <!-- Logo -->
       <router-link
         to="/"
@@ -29,19 +30,15 @@ const menu = [
       </router-link>
 
       <!-- Desktop Menu -->
-      <div class="flex items-center gap-6 text-sm font-semibold">
+      <div class="hidden md:flex items-center gap-8 text-sm font-semibold">
         <router-link
           v-for="item in menu"
           :key="item.name"
           :to="item.path"
-          class="relative text-gray-600 hover:text-red-500 transition"
-          :class="{ 'text-red-500': $route.path === item.path }"
+          class="text-gray-300 hover:text-yellow-400 transition"
+          :class="{ 'text-yellow-400': $route.path === item.path }"
         >
           {{ item.name }}
-          <span
-            v-if="$route.path === item.path"
-            class="absolute -bottom-1 left-0 w-full h-0.5 bg-red-500 rounded"
-          />
         </router-link>
       </div>
 
@@ -58,7 +55,11 @@ const menu = [
           stroke-width="2"
           viewBox="0 0 24 24"
         >
-          <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16" />
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="M4 6h16M4 12h16M4 18h16"
+          />
         </svg>
 
         <svg
@@ -69,7 +70,11 @@ const menu = [
           stroke-width="2"
           viewBox="0 0 24 24"
         >
-          <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="M6 18L18 6M6 6l12 12"
+          />
         </svg>
       </button>
     </div>

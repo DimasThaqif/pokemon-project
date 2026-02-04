@@ -1,7 +1,11 @@
 <template>
-  <div class="p-6">
-    <h1 class="text-2xl font-bold">Pokemon Detail</h1>
+  <div class="min-h-screen bg-neutral-900 text-white p-8">
+    <h1 class="text-3xl font-bold capitalize mb-4">
+      Pokémon Detail
+    </h1>
+    <p class="text-gray-400">
+      Detail Pokémon akan ditampilkan di sini.
+    </p>
   </div>
-
-  
 </template>
+

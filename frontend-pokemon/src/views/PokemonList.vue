@@ -23,15 +23,17 @@ onMounted(fetchPokemons);
 </script>
 
 <template>
-  <div class="min-h-screen bg-gray-100 p-6">
-    <h1 class="text-3xl font-bold mb-2">Pokémon List</h1>
+  <div class="min-h-screen bg-neutral-900 px-6 py-10">
+    <h1 class="text-4xl font-extrabold mb-3 text-center tracking-wide">
+      Pokémon List
+    </h1>
 
     <span
-      class="inline-block mb-4 px-3 py-1 rounded-full text-xs font-semibold"
+      class="block mx-auto w-fit mb-8 px-4 py-1 rounded-full text-xs font-semibold"
       :class="
         source === 'api'
-          ? 'bg-red-200 text-red-600'
-          : 'bg-green-200 text-green-600'
+          ? 'bg-red-500/20 text-red-400'
+          : 'bg-green-500/20 text-green-400'
       "
     >
       Source: {{ source }}
@@ -50,7 +52,7 @@ onMounted(fetchPokemons);
 
     <div
       v-else
-      class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4"
+      class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6"
     >
       <PokemonCard
         v-for="pokemon in pokemons"
