@@ -2,23 +2,12 @@
 import HelloWorld from './components/HelloWorld.vue'
 import Navbar from './components/Navbar.vue'
 </script>
-
 <template>
-  <Navbar />
-  <router-view />
+  <div class="min-h-screen bg-neutral-900 text-white">
+    <Navbar />
+    <main class="pt-4">
+      <router-view />
+    </main>
+  </div>
 </template>
 
-<style scoped>
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.vue:hover {
-  filter: drop-shadow(0 0 2em #42b883aa);
-}
-</style>

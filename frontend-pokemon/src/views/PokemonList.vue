@@ -28,23 +28,30 @@ onMounted(fetchPokemons);
 
     <span
       class="inline-block mb-4 px-3 py-1 rounded-full text-xs font-semibold"
-      :class="source === 'api' 
-        ? 'bg-red-200' 
-        : 'bg-green-200'"
+      :class="
+        source === 'api'
+          ? 'bg-red-200 text-red-600'
+          : 'bg-green-200 text-green-600'
+      "
     >
       Source: {{ source }}
     </span>
 
-    <div v-if="loading" class="text-center py-10 text-gray-500">Loading...</div>
-
-    <div
-      v-else-if = "pokemons.length === 0"
-      class="text-center py-10 text-gray-400"
-    >
-      Tidak ada pokemon
+    <div v-if="loading" class="text-center py-10 text-gray-500">
+      Loading Pokémon...
     </div>
 
-    <div v-else class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4">
+    <div
+      v-else-if="pokemons.length === 0"
+      class="text-center py-10 text-gray-400"
+    >
+      Tidak ada data Pokémon
+    </div>
+
+    <div
+      v-else
+      class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4"
+    >
       <PokemonCard
         v-for="pokemon in pokemons"
         :key="pokemon.name"
