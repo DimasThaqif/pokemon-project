@@ -12,40 +12,45 @@ const menu = [
 </script>
 
 <template>
-  <nav
-    class="sticky top-0 z-50 bg-neutral-900/80 backdrop-blur border-b border-neutral-700"
-  >
+  <nav class="sticky top-0 z-50 bg-white border-b border-gray-200 shadow-sm">
     <div class="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
       <!-- Logo -->
       <router-link
         to="/"
-        class="flex items-center gap-2 font-extrabold text-xl text-gray-800 hover:opacity-80 transition"
+        class="flex items-center gap-2 hover:opacity-80 transition-opacity"
       >
         <img
           src="https://raw.githubusercontent.com/PokeAPI/media/master/logo/pokeapi_256.png"
-          class="h-8 w-8 object-contain"
+          class="h-10 w-10 object-contain"
           alt="PokeAPI Logo"
         />
-        <span class="hidden sm:block">PokeDex</span>
+        <span class="font-black text-xl text-gray-900">
+          PokéDex
+        </span>
       </router-link>
 
       <!-- Desktop Menu -->
-      <div class="hidden md:flex items-center gap-8 text-sm font-semibold">
+      <div class="hidden md:flex items-center gap-1">
         <router-link
           v-for="item in menu"
           :key="item.name"
           :to="item.path"
-          class="text-gray-300 hover:text-yellow-400 transition"
-          :class="{ 'text-yellow-400': $route.path === item.path }"
+          class="px-4 py-2 rounded-lg text-sm font-semibold
+                 text-gray-700 hover:text-gray-900 hover:bg-gray-100
+                 transition-all duration-200"
+          :class="{ 
+            'bg-red-500 text-white hover:bg-red-600 hover:text-white': 
+            $route.path === item.path 
+          }"
         >
           {{ item.name }}
         </router-link>
       </div>
 
-      <!-- Mobile Button -->
+      <!-- Mobile Menu Button -->
       <button
         @click="open = !open"
-        class="md:hidden text-gray-700 focus:outline-none"
+        class="md:hidden p-2 text-gray-700 hover:bg-gray-100 rounded-lg transition-colors"
       >
         <svg
           v-if="!open"
@@ -82,15 +87,19 @@ const menu = [
     <!-- Mobile Menu -->
     <div
       v-if="open"
-      class="md:hidden bg-white border-t border-gray-200 px-6 py-4 space-y-3"
+      class="md:hidden bg-white border-t border-gray-200 px-6 py-4 space-y-2"
     >
       <router-link
         v-for="item in menu"
         :key="item.name"
         :to="item.path"
         @click="open = false"
-        class="block font-medium text-gray-700 hover:text-red-500 transition"
-        :class="{ 'text-red-500': $route.path === item.path }"
+        class="block px-4 py-2 rounded-lg font-semibold 
+               text-gray-700 hover:bg-gray-100 transition-colors"
+        :class="{ 
+          'bg-red-500 text-white hover:bg-red-600': 
+          $route.path === item.path 
+        }"
       >
         {{ item.name }}
       </router-link>
